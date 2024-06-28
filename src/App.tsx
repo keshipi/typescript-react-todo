@@ -19,11 +19,23 @@ function App() {
       });
     });
   };
+
+  const addTodo = (title: string) => {
+    setTodoList((prevTodoList) => {
+      const newTodo = {
+        id: Date.now(),
+        title,
+        completed: false,
+      };
+
+      return [newTodo, ...prevTodoList];
+    });
+  };
   return (
     <main className="mx-auto mt-10 max-w-xl">
       <h1 className="text-center text-4xl">Todoアプリ</h1>
       <div className="space-y-5">
-        <AddTodoForm />
+        <AddTodoForm addTodo={addTodo} />
         <div className="rounded bg-slate-200 p-5">
           <TodoList todoList={todoList} changeCompleted={changeCompleted} />
         </div>

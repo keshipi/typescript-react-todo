@@ -1,11 +1,20 @@
 import { Plus } from 'lucide-react';
 import { useState } from 'react';
 
-export const AddTodoForm = () => {
+type Props = {
+  addTodo: (title: string) => void;
+};
+
+export const AddTodoForm = ({ addTodo }: Props) => {
   const [inputValue, setInputValue] = useState('');
 
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    addTodo(inputValue);
+    setInputValue('');
+  };
   return (
-    <form className="flex">
+    <form className="flex" onSubmit={onSubmit}>
       <input
         type="text"
         placeholder="新しいTodoを入力してください"
